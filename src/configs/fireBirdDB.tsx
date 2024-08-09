@@ -25,4 +25,4 @@ const CheckConnection = () => {
   });
 };
 
-export { CheckConnection };
+export { CheckConnection, options };

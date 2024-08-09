@@ -4,9 +4,8 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { sequelize } from "@/configs/mysqlDB";
 import { CheckConnection } from "@/configs/fireBirdDB";
 export const metadata: Metadata = {
-  title:
-    "Next.js E-commerce Dashboard | TailAdmin - Next.js Dashboard Template",
-  description: "This is Next.js Home for TailAdmin Dashboard Template",
+  title: "E-DTRM",
+  description: "Electronic Daily Time Record Monitoring Application",
 };
 
 export default function Home() {

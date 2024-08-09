@@ -1,62 +1,47 @@
 "use client";
-import jsVectorMap from "jsvectormap";
-import "jsvectormap/dist/jsvectormap.css";
 import React, { useEffect } from "react";
-import "../../js/us-aea-en";
+import { Marker, Popup, MapContainer, TileLayer } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import Log from "@/interfaces/Log";
+import moment from "moment";
 
-const MapOne: React.FC = () => {
-  useEffect(() => {
-    const mapOne = new jsVectorMap({
-      selector: "#mapOne",
-      map: "us_aea_en",
-      zoomButtons: true,
-
-      regionStyle: {
-        initial: {
-          fill: "#C8D0D8",
-        },
-        hover: {
-          fillOpacity: 1,
-          fill: "#3056D3",
-        },
-      },
-      regionLabelStyle: {
-        initial: {
-          fontFamily: "Satoshi",
-          fontWeight: "semibold",
-          fill: "#fff",
-        },
-        hover: {
-          cursor: "pointer",
-        },
-      },
-
-      labels: {
-        regions: {
-          render(code: string) {
-            return code.split("-")[1];
-          },
-        },
-      },
-    });
-
-    return () => {
-      const map = document.getElementById("mapOne");
-      if (map) {
-        map.innerHTML = "";
-      }
-      // mapOne.destroy();
-    };
-  }, []);
-
+type Props = {
+  Logs: Log[];
+};
+const MapOne: React.FC<Props> = ({ Logs }) => {
+  const position: [number, number] = [7.837366735911573, 123.400498137435918];
+  const icon = L.icon({
+    iconUrl: "/images/icon/marker-icon-2x.png",
+    iconSize: [38, 50],
+    iconAnchor: [22, 50],
+    popupAnchor: [-3, -76],
+    shadowUrl: "/images/icon/marker-shadow.png",
+  });
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-7">
-      <h4 className="mb-2 text-xl font-semibold text-black dark:text-white">
-        Region labels
-      </h4>
-      <div className="h-90">
-        <div id="mapOne" className="mapOne map-btn"></div>
-      </div>
+    <div>
+      <MapContainer center={position} zoom={35} style={{ height: 400 }}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {Logs.map((log, key) =>
+          (log.LAT && log.LON) || log.LAT == 0 ? (
+            <Marker position={[log.LAT, log.LON]} icon={icon} key={key}>
+              <Popup>
+                <div>
+                  <h5 className="text-xs text-blue-700">{log.EMP_NAME}</h5>
+                  <ul>
+                    <li> {moment(log.LOGTIME).format("MMM DD, yyyy")}</li>
+                    <li>{moment(log.LOGTIME).format("hh:mm a")}</li>
+                  </ul>
+                </div>
+              </Popup>
+            </Marker>
+          ) : null,
+        )}
+      </MapContainer>
+      ,
     </div>
   );
 };
