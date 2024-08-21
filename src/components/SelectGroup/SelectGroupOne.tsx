@@ -1,7 +1,13 @@
 "use client";
 import React, { useState } from "react";
+import Option from "@/types/options";
 
-const SelectGroupOne: React.FC = () => {
+type Prop = {
+  name: string;
+  label: string;
+  options: Option[];
+};
+const SelectGroupOne: React.FC<Prop> = ({ name, label, options }) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
 
@@ -11,14 +17,14 @@ const SelectGroupOne: React.FC = () => {
 
   return (
     <div className="mb-4.5">
-      <label className="mb-2.5 block text-black dark:text-white">
-        {" "}
-        Subject{" "}
+      <label className="mb-2.5 block font-semibold text-black dark:text-white">
+        {label}
       </label>
 
       <div className="relative z-20 bg-transparent dark:bg-form-input">
         <select
           value={selectedOption}
+          name={name}
           onChange={(e) => {
             setSelectedOption(e.target.value);
             changeTextColor();
@@ -28,17 +34,17 @@ const SelectGroupOne: React.FC = () => {
           }`}
         >
           <option value="" disabled className="text-body dark:text-bodydark">
-            Select your subject
+            Select your {label.toLowerCase()}
           </option>
-          <option value="USA" className="text-body dark:text-bodydark">
-            USA
-          </option>
-          <option value="UK" className="text-body dark:text-bodydark">
-            UK
-          </option>
-          <option value="Canada" className="text-body dark:text-bodydark">
-            Canada
-          </option>
+          {options.map((opt, key) => (
+            <option
+              value={opt.value.trim()}
+              key={key}
+              className="text-body dark:text-bodydark"
+            >
+              {opt.label.toUpperCase()}
+            </option>
+          ))}
         </select>
 
         <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">

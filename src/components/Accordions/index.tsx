@@ -14,8 +14,8 @@ const Accordion: React.FC<Prop> = ({ title, children }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full bg-blue-700 p-4 text-left hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
       >
-        <div className="flex items-center justify-between text-slate-100">
-          <span>{title}</span>
+        <div className="flex items-center justify-between  text-slate-100">
+          <span className="text-2xl">{title}</span>
           <span className="text-3xl">{isOpen ? "-" : "+"}</span>
         </div>
       </button>

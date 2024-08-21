@@ -4,7 +4,8 @@ interface Log {
     INOUT: number
     LON: number
     LAT: number
-    EMP_NAME: string | null
+    EMPNAME: string | null
+    DIVISIONCODE?: string
 }
 
 export default Log

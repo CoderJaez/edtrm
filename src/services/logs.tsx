@@ -2,7 +2,7 @@ import { options } from "@/configs/fireBirdDB";
 import Firebird from "node-firebird";
 import Log from "@/interfaces/Log";
 
-const GetLogs = async () => {
+const GetLogs = async (page: number, pageSize: number) => {
   return new Promise<Log[]>((resolve, reject) => {
     Firebird.attach(options, function (err, db) {
       if (err) {
@@ -10,8 +10,10 @@ const GetLogs = async () => {
         return;
       }
 
+      const skip = (page - 1) * pageSize;
+
       db.query(
-        "SELECT FIRST 50 SKIP 0 r.LOGTIME, r.IDNUM, r.INOUT, r.LON, r.LAT, (SELECT e.EMPNAME FROM EMPLOYEE e WHERE e.EMPCODE = '0' || r.IDNUM ) as EMP_NAME FROM LOG r order by r.LOGTIME desc",
+        `SELECT FIRST ${pageSize} SKIP ${skip} r.LOGTIME, r.IDNUM, r.INOUT, r.LON, r.LAT,e.EMPNAME  FROM LOG r inner join EMPLOYEE e on e.BIONUM = r.IDNUM order by r.LOGTIME desc`,
         [],
         function (errQry: any, result: Log[]) {
           db.detach();

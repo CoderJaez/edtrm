@@ -13,8 +13,8 @@ const CheckConnection = () => {
     if (err) throw err;
 
     db.query(
-      'SELECT r.LOGTIME, r.IDNUM, r.INOUT, r.OVERRIDE, r.DEVICEID,r."HASH", r.LOG_RAW, r.LON, r.LAT FROM LOG r where r.IDNUM = ? order by r.LOGTIME desc',
-      ["0199"],
+      'SELECT r.LOGTIME, r.IDNUM, r.INOUT, r.OVERRIDE, r.DEVICEID,r."HASH", r.LOG_RAW, r.LON, r.LAT FROM LOG r where  order by r.LOGTIME desc',
+      [],
       function (errQry: any, result: any) {
         if (errQry) throw errQry;
 

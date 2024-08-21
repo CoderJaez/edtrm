@@ -36,7 +36,7 @@ const TableThree: React.FC<Props> = ({ logs }) => {
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
-                    {log.EMP_NAME}
+                    {log.EMPNAME}
                   </h5>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
