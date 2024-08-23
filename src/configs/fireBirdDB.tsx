@@ -18,7 +18,6 @@ const CheckConnection = () => {
       function (errQry: any, result: any) {
         if (errQry) throw errQry;
 
-        console.log(result);
         db.detach();
       },
     );
