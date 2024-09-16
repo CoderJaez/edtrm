@@ -13,6 +13,9 @@ const TableThree: React.FC<Props> = ({ logs }) => {
               <th className="min-w-[50px] px-4 py-4 font-medium text-black dark:text-white">
                 ID #
               </th>
+              <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
+                Division
+              </th>
               <th className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">
                 Employee name
               </th>
@@ -33,6 +36,11 @@ const TableThree: React.FC<Props> = ({ logs }) => {
               <tr key={key}>
                 <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                   <p className="text-black dark:text-white">{log.IDNUM}</p>
+                </td>
+                <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                  <p className="text-black dark:text-white">
+                    {log.DIVISIONCODE}
+                  </p>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">

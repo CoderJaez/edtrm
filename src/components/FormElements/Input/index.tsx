@@ -10,7 +10,7 @@ type Prop = {
 const Input: React.FC<Prop> = ({ name, label, value, placeholder }) => {
   return (
     <div>
-      <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+      <label className="mb-3 block text-sm font-medium font-semibold text-black dark:text-white">
         {label}
       </label>
       <input

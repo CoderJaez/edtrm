@@ -21,12 +21,19 @@ type Prop = {
     division_code: string | undefined;
     employee: string | undefined;
     page: number | undefined;
+    time_inout: string | undefined;
   };
 };
 const LogPage: React.FC<Prop> = async ({ searchParams }) => {
   const page = searchParams.page ? searchParams.page : 1;
   const pageSize = 20;
-  const { logs, metaData } = await GetLogs(page, pageSize);
+  const { logs, metaData } = await GetLogs(
+    page,
+    pageSize,
+    searchParams.division_code,
+    searchParams.time_inout,
+    searchParams.employee,
+  );
   const divisions = await GetDivision();
   const options: Option[] = divisions.map((div: Division) => ({
     value: div.DIVISIONCODE,
@@ -43,7 +50,6 @@ const LogPage: React.FC<Prop> = async ({ searchParams }) => {
           <MapOne Logs={logs} />
         </div>
         <div className="mt-4">
-          <p>Total: {metaData.total}</p>
           <Pagination
             currentPage={metaData.page}
             totalPages={metaData.totalPages}
@@ -53,7 +59,7 @@ const LogPage: React.FC<Prop> = async ({ searchParams }) => {
           <Pagination
             currentPage={metaData.page}
             totalPages={metaData.totalPages}
-            baseUrl="http://localhost:3000/logs"
+            baseUrl="/logs"
           />
         </div>
       </div>
