@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Edtrm = () => {
-  return (
-    <div>Edtrm</div>
-  )
-}
+  return <div></div>;
+};
 
-export default Edtrm
+export default Edtrm;

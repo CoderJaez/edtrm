@@ -60,8 +60,12 @@ const TableThree: React.FC<Props> = ({ logs }) => {
                 <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                   <p className="text-black dark:text-white">
                     {log.INOUT === 0 ? "IN" : "OUT"} <br />{" "}
-                    {(log.LAT && log.LON) || log.LAT == 0 ? null : "NO GPS"}
                   </p>
+                  {(log.LAT && log.LON) || log.LAT == 0 ? null : (
+                    <p className="w-15 rounded  bg-rose-600 text-center text-xs text-white">
+                      NO GPS
+                    </p>
+                  )}
                 </td>
               </tr>
             ))}

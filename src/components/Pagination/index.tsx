@@ -31,7 +31,7 @@ export function Pagination({
     <div className="mt-4 flex justify-center space-x-2">
       {currentPage > 1 && (
         <Link
-          href={`${baseUrl}?page=${prev}${division_code ?? division_code}${time_inout ?? time_inout}${employee ?? employee}`}
+          href={`${baseUrl}?page=${prev}${division_code ? division_code : ""} ${time_inout ? time_inout : ""}${employee ? employee : ""}`}
           className="rounded bg-blue-500 px-3 py-2 text-white"
         >
           Previous
@@ -42,7 +42,7 @@ export function Pagination({
       </span>
       {currentPage < totalPages && (
         <Link
-          href={`${baseUrl}?page=${next}${division_code ?? division_code}${time_inout ?? time_inout}${employee ?? employee}`}
+          href={`${baseUrl}?page=${next}${division_code ? division_code : ""} ${time_inout ? time_inout : ""}${employee ? employee : ""}`}
           className="rounded bg-blue-500 px-3 py-2 text-white"
         >
           Next
