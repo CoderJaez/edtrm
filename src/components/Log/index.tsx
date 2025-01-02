@@ -8,7 +8,7 @@ import Option from "@/types/options";
 import Division from "@/interfaces/Division";
 import Filter from "@/components/Log/Filter";
 import React from "react";
-
+import LogMetaData from "@/interfaces/LogMetaData";
 type Prop = {
   searchParams: { division_code: string | undefined };
 };
@@ -29,10 +29,10 @@ const Log = async ({ searchParams }: Prop) => {
         <Filter options={options} />
       </div>
       <div className="min-h-[500px]">
-        <MapOne Logs={logs} />
+        <MapOne Logs={logs.logs} />
       </div>
       <div className="mt-4">
-        <TableThree logs={logs} />
+        <TableThree logs={logs.logs} />
       </div>
     </div>
   );

@@ -60,8 +60,8 @@ const GetLogs = async (
 ) => {
   return new Promise<LogData>((resolve, reject) => {
     const { clause, values } = whereClause(division_code, time_inout, employee);
-    console.log(division_code, time_inout, employee);
-    console.log(clause);
+    // console.log(division_code, time_inout, employee);
+    // console.log(clause);
     Firebird.attach(options, function (err, db) {
       if (err) {
         reject(err);
