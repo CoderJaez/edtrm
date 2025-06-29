@@ -4,8 +4,8 @@ const options = {
   host: "172.20.82.101",
   port: 3050,
   database: "d:/programs/dbdilg.fdb",
-  user: "ZTMAHUMOC",
-  password: "zoilo",
+  user: "RICTU",
+  password: "rictu@dilg9",
 };
 
 const CheckConnection = () => {
