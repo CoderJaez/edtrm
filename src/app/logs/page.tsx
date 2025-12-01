@@ -53,19 +53,21 @@ const LogPage: React.FC<Prop> = async ({ searchParams }) => {
         <div className="min-h-[500px]">
           <MapOne Logs={logs} />
         </div>
-        <div className="mt-4">
-          <Pagination
-            currentPage={metaData.page}
-            totalPages={metaData.totalPages}
-            baseUrl="/logs"
-          />
-          <TableThree logs={logs} />
-          <Pagination
-            currentPage={metaData.page}
-            totalPages={metaData.totalPages}
-            baseUrl="/logs"
-          />
-        </div>
+        <>
+          <div className="mt-4">
+            <Pagination
+              currentPage={metaData.page}
+              totalPages={metaData.totalPages}
+              baseUrl="/logs"
+            />
+            <TableThree logs={logs} />
+            <Pagination
+              currentPage={metaData.page}
+              totalPages={metaData.totalPages}
+              baseUrl="/logs"
+            />
+          </div>
+        </>
       </div>
     </DefaultLayout>
   );
