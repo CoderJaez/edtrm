@@ -51,7 +51,14 @@ const Filter: React.FC<Prop> = ({ options }) => {
     <>
       <Accordion title="Advance Search">
         <form onSubmit={onSubmit}>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="my-4 flex items-start justify-end">
+            <input
+              type="submit"
+              value="Filter"
+              className="w-22 cursor-pointer rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90"
+            />
+          </div>
+          <div className="grid gap-4 md:grid-cols-5">
             <SelectGroupOne
               label="Division"
               name="division_code"
@@ -87,13 +94,6 @@ const Filter: React.FC<Prop> = ({ options }) => {
                 className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
             </div>
-          </div>
-          <div className="my-4 ">
-            <input
-              type="submit"
-              value="Filter"
-              className="w-22 cursor-pointer rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90"
-            />
           </div>
         </form>
       </Accordion>
