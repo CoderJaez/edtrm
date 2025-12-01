@@ -26,12 +26,18 @@ export function Pagination({
   const employee = params.get("employee")
     ? `&employee=${params.get("employee")}`
     : null;
+  const start_date = params.get("start_date")
+    ? `&start_date=${params.get("start_date")}`
+    : null;
+  const end_date = params.get("start_date")
+    ? `&end_date=${params.get("end_date")}`
+    : null;
 
   return (
     <div className="mt-4 flex justify-center space-x-2">
       {currentPage > 1 && (
         <Link
-          href={`${baseUrl}?page=${prev}${division_code ? division_code : ""} ${time_inout ? time_inout : ""}${employee ? employee : ""}`}
+          href={`${baseUrl}?page=${prev}${division_code ? division_code : ""} ${time_inout ? time_inout : ""}${employee ? employee : ""}${start_date ?? ""}${end_date ?? ""}`}
           className="rounded bg-blue-500 px-3 py-2 text-white"
         >
           Previous
@@ -42,7 +48,7 @@ export function Pagination({
       </span>
       {currentPage < totalPages && (
         <Link
-          href={`${baseUrl}?page=${next}${division_code ? division_code : ""} ${time_inout ? time_inout : ""}${employee ? employee : ""}`}
+          href={`${baseUrl}?page=${next}${division_code ? division_code : ""} ${time_inout ? time_inout : ""}${employee ? employee : ""}${start_date ?? ""}${end_date ?? ""}`}
           className="rounded bg-blue-500 px-3 py-2 text-white"
         >
           Next

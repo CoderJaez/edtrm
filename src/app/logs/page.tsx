@@ -22,17 +22,21 @@ type Prop = {
     employee: string | undefined;
     page: number | undefined;
     time_inout: string | undefined;
+    start_date: string | undefined;
+    end_date: string | undefined;
   };
 };
 const LogPage: React.FC<Prop> = async ({ searchParams }) => {
   const page = searchParams.page ? searchParams.page : 1;
-  const pageSize = 20;
+  const pageSize = 200;
   const { logs, metaData } = await GetLogs(
     page,
     pageSize,
     searchParams.division_code,
     searchParams.time_inout,
     searchParams.employee,
+    searchParams.start_date,
+    searchParams.end_date,
   );
   const divisions = await GetDivision();
   const options: Option[] = divisions.map((div: Division) => ({

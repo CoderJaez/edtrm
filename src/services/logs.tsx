@@ -12,44 +12,45 @@ const whereClause = (
   division_code?: string,
   time_inout?: string,
   employee?: string,
+  start_date?: string,
+  end_date?: string,
 ) => {
-  if (division_code && time_inout && employee) {
-    return {
-      clause: "WHERE e.DIVISIONCODE = ? AND e.EMPNAME LIKE ? AND r.INOUT = ?",
-      values: [division_code, `%${employee}%`, time_inout],
-    };
-  } else if (division_code && employee) {
-    return {
-      clause: "WHERE e.DIVISIONCODE = ? AND e.EMPNAME LIKE ? ",
-      values: [division_code, `%${employee}%`],
-    };
-  } else if (division_code && time_inout) {
-    return {
-      clause: "WHERE e.DIVISIONCODE = ? AND r.INOUT = ? ",
-      values: [division_code, time_inout],
-    };
-  } else if (time_inout && employee) {
-    return {
-      clause: "WHERE e.EMPNAME LIKE ? AND r.INOUT = ?",
-      values: [`%${employee}%`, time_inout],
-    };
-  } else if (division_code) {
-    return {
-      clause: "WHERE e.DIVISIONCODE = ?",
-      values: [division_code],
-    };
-  } else if (time_inout) {
-    return {
-      clause: "WHERE r.INOUT = ?",
-      values: [time_inout],
-    };
-  } else if (employee) {
-    return {
-      clause: "WHERE  e.EMPNAME LIKE  ?",
-      values: [`%${employee}%`],
-    };
+  const clauses: string[] = [];
+  const values: (string | number)[] = [];
+
+  if (division_code) {
+    clauses.push("e.DIVISIONCODE = ?");
+    values.push(division_code);
   }
-  return { clause: null, values: null };
+
+  if (employee) {
+    clauses.push("e.EMPNAME LIKE ?");
+    values.push(`%${employee}%`);
+  }
+
+  if (time_inout) {
+    clauses.push("r.INOUT = ?");
+    values.push(time_inout);
+  }
+
+  if (start_date) {
+    clauses.push("CAST(r.LOGTIME AS DATE) >= ?");
+    values.push(start_date);
+  }
+
+  if (end_date) {
+    clauses.push("CAST(r.LOGTIME AS DATE) <= ?");
+    values.push(end_date);
+  }
+
+  if (clauses.length === 0) {
+    return { clause: null, values: null };
+  }
+
+  return {
+    clause: `WHERE ${clauses.join(" AND ")}`,
+    values,
+  };
 };
 const GetLogs = async (
   page: number,
@@ -57,9 +58,17 @@ const GetLogs = async (
   division_code?: string,
   time_inout?: string,
   employee?: string,
+  start_date?: string,
+  end_date?: string,
 ) => {
   return new Promise<LogData>((resolve, reject) => {
-    const { clause, values } = whereClause(division_code, time_inout, employee);
+    const { clause, values } = whereClause(
+      division_code,
+      time_inout,
+      employee,
+      start_date,
+      end_date,
+    );
     // console.log(division_code, time_inout, employee);
     // console.log(clause);
     Firebird.attach(options, function (err, db) {
