@@ -25,7 +25,7 @@ const whereClause = (
 
   if (employee) {
     clauses.push("e.EMPNAME LIKE ?");
-    values.push(`%${employee}%`);
+    values.push(`%${employee.toUpperCase()}%`);
   }
 
   if (time_inout) {

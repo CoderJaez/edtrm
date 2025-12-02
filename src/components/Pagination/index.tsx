@@ -37,7 +37,7 @@ export function Pagination({
     <div className="mt-4 flex justify-center space-x-2">
       {currentPage > 1 && (
         <Link
-          href={`${baseUrl}?page=${prev}${division_code ? division_code : ""} ${time_inout ? time_inout : ""}${employee ? employee : ""}${start_date ?? ""}${end_date ?? ""}`}
+          href={`${baseUrl}?page=${prev}${division_code ?? ""} ${time_inout ?? ""}${employee ?? ""}${start_date ?? ""}${end_date ?? ""}`}
           className="rounded bg-blue-500 px-3 py-2 text-white"
         >
           Previous
